@@ -11,3 +11,5 @@ warnings.filterwarnings('ignore')
 
 df_train = pd.read_csv('train.csv')
 print(df_train.columns)
+
+df_train['SalePrice'].describe()
