@@ -17,7 +17,7 @@ print(df_train.columns)
 #Facts about the most important variable
 
 print(df_train['SalePrice'].describe())
-sns.displot(df_train['SalePrice'])
+#sns.displot(df_train['SalePrice'])
 print("Skewness: %f" % df_train['SalePrice'].skew()) 
 print("Kurtosis: %f" % df_train['SalePrice'].kurt())
 
@@ -37,5 +37,11 @@ dataOverAllQual = pd.concat([df_train['SalePrice'], df_train[varOverAllQual]], a
 f,ax = plt.subplots(figsize=(8,6))
 fig = sns.boxplot(x=varOverAllQual, y="SalePrice", data = dataOverAllQual)
 fig.axis(ymin=0, ymax=800000)
+
+varYearBuilt = 'YearBuilt'
+dataYearBuilt = pd.concat([df_train['SalePrice'], df_train[varYearBuilt]],axis=1)
+f, ax =plt.subplots(figsize=(16,8))
+fig = sns.boxplot(x = varYearBuilt, y = "SalePrice", data = dataYearBuilt)
+plt.xticks(rotation = 90)
 
 plt.show()
