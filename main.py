@@ -6,6 +6,7 @@ from scipy.stats.stats import PearsonRConstantInputWarning
 import seaborn as sns
 import numpy as np
 from scipy.stats import norm
+from seaborn.matrix import heatmap
 from sklearn.preprocessing import StandardScaler
 from scipy import stats
 import warnings
@@ -35,13 +36,17 @@ dataBsm = pd.concat([df_train['SalePrice'], df_train[var2]], axis=1)
 varOverAllQual = 'OverallQual'
 dataOverAllQual = pd.concat([df_train['SalePrice'], df_train[varOverAllQual]], axis=1)
 f,ax = plt.subplots(figsize=(8,6))
-fig = sns.boxplot(x=varOverAllQual, y="SalePrice", data = dataOverAllQual)
-fig.axis(ymin=0, ymax=800000)
+#fig = sns.boxplot(x=varOverAllQual, y="SalePrice", data = dataOverAllQual)
+#fig.axis(ymin=0, ymax=800000)
 
 varYearBuilt = 'YearBuilt'
 dataYearBuilt = pd.concat([df_train['SalePrice'], df_train[varYearBuilt]],axis=1)
 f, ax =plt.subplots(figsize=(16,8))
-fig = sns.boxplot(x = varYearBuilt, y = "SalePrice", data = dataYearBuilt)
-plt.xticks(rotation = 90)
+#fig = sns.boxplot(x = varYearBuilt, y = "SalePrice", data = dataYearBuilt)
+#plt.xticks(rotation = 90)
 
+#Correlation matix(heatmap style)
+corrmat = df_train.corr()
+f, ax = plt.subplots(figsize=(12,9))
+sns.heatmap(corrmat, vmax=.8, square=True)
 plt.show()
