@@ -48,5 +48,12 @@ f, ax =plt.subplots(figsize=(16,8))
 #Correlation matix(heatmap style)
 corrmat = df_train.corr()
 f, ax = plt.subplots(figsize=(12,9))
-sns.heatmap(corrmat, vmax=.8, square=True)
+#sns.heatmap(corrmat, vmax=.8, square=True)
+
+#'SalePrice collerlation matrix (zoomed heatmap)'
+k = 10 #number of variables
+cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
+cm = np.corrcoef(df_train[cols].values.T)
+sns.set(font_scale=1.25)
+hm = sns.heatmap(cm, cbar = True, annot = True, square = True, fmt = '.2f', annot_kws = {'size':10}, yticklabels = cols.values, xticklabels = cols.values)
 plt.show()
