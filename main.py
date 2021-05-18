@@ -41,19 +41,24 @@ f,ax = plt.subplots(figsize=(8,6))
 
 varYearBuilt = 'YearBuilt'
 dataYearBuilt = pd.concat([df_train['SalePrice'], df_train[varYearBuilt]],axis=1)
-f, ax =plt.subplots(figsize=(16,8))
+#f, ax =plt.subplots(figsize=(16,8))
 #fig = sns.boxplot(x = varYearBuilt, y = "SalePrice", data = dataYearBuilt)
 #plt.xticks(rotation = 90)
 
 #Correlation matix(heatmap style)
 corrmat = df_train.corr()
-f, ax = plt.subplots(figsize=(12,9))
+#f, ax = plt.subplots(figsize=(12,9))
 #sns.heatmap(corrmat, vmax=.8, square=True)
 
 #'SalePrice collerlation matrix (zoomed heatmap)'
 k = 10 #number of variables
 cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
-cm = np.corrcoef(df_train[cols].values.T)
-sns.set(font_scale=1.25)
-hm = sns.heatmap(cm, cbar = True, annot = True, square = True, fmt = '.2f', annot_kws = {'size':10}, yticklabels = cols.values, xticklabels = cols.values)
+#cm = np.corrcoef(df_train[cols].values.T)
+#sns.set(font_scale=1.25)
+#hm = sns.heatmap(cm, cbar = True, annot = True, square = True, fmt = '.2f', annot_kws = {'size':10}, yticklabels = cols.values, xticklabels = cols.values)
+
+#Scatter plots between 'SalePrice' and correlated variables 
+sns.set()
+colsScatter = ['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt']
+sns.pairplot(df_train[colsScatter], size = 2.0)
 plt.show()
