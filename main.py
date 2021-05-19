@@ -35,7 +35,7 @@ dataBsm = pd.concat([df_train['SalePrice'], df_train[var2]], axis=1)
 
 varOverAllQual = 'OverallQual'
 dataOverAllQual = pd.concat([df_train['SalePrice'], df_train[varOverAllQual]], axis=1)
-f,ax = plt.subplots(figsize=(8,6))
+#f,ax = plt.subplots(figsize=(8,6))
 #fig = sns.boxplot(x=varOverAllQual, y="SalePrice", data = dataOverAllQual)
 #fig.axis(ymin=0, ymax=800000)
 
@@ -67,4 +67,18 @@ total = df_train.isnull().sum().sort_values(ascending = False)
 percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascending = False)
 missing_data = pd.concat([total, percent], axis = 1, keys = ['Total','Percent'])
 print(missing_data.head(20))
+
+#dealing with missing data
+#df_train = df_train.drop((missing_data[missing_data['Total'] > 1]).index,1)
+#df_train = df_train.drop(df_train.loc[df_train['Electrical'].isnull()].index)
+#print(df_train.isnull().sum().max())
+
+#Univariate anaysis / standardizing data
+saleprice__scaled = StandardScaler().fit_transform(df_train['SalePrice'][:,np.newaxis])
+low_range = saleprice__scaled[saleprice__scaled[:,0].argsort()][:10]
+high_range = saleprice__scaled[saleprice__scaled[:,0].argsort()][-10:]
+print('outer range (low) of the distribution:')
+print(low_range)
+print('\nouter range (high) of the distribution:')
+print(high_range)
 plt.show()
