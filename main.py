@@ -81,4 +81,23 @@ print('outer range (low) of the distribution:')
 print(low_range)
 print('\nouter range (high) of the distribution:')
 print(high_range)
+
+#Testing Sale Price
+#Search normality
+#Histogram / normal probalitity plot(SalePrice)
+df_train['SalePrice'] = np.log(df_train['SalePrice'])
+#sns.distplot(df_train['SalePrice'], fit=norm)
+#fig = plt.figure()
+#res = stats.probplot(df_train['SalePrice'], plot = plt)
+
+#Histogram / normal probalitity plot(GrLivarea)
+df_train['GrLivArea'] = np.log(df_train['GrLivArea'])
+#sns.distplot(df_train['GrLivArea'], fit = norm)
+#fig = plt.figure()
+#res = stats.probplot(df_train['GrLivArea'], plot = plt)
+
+#Histogram / normal probalitity plot(TotalBsmtSF)
+sns.distplot(df_train['TotalBsmtSF'], fit = norm)
+fig = plt.figure()
+res = stats.probplot(df_train['TotalBsmtSF'], plot = plt)
 plt.show()
