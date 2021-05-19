@@ -60,5 +60,11 @@ cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
 #Scatter plots between 'SalePrice' and correlated variables 
 sns.set()
 colsScatter = ['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars', 'TotalBsmtSF', 'FullBath', 'YearBuilt']
-sns.pairplot(df_train[colsScatter], size = 2.0)
+#sns.pairplot(df_train[colsScatter], size = 2.0)
+
+#missing data
+total = df_train.isnull().sum().sort_values(ascending = False)
+percent = (df_train.isnull().sum()/df_train.isnull().count()).sort_values(ascending = False)
+missing_data = pd.concat([total, percent], axis = 1, keys = ['Total','Percent'])
+print(missing_data.head(20))
 plt.show()
