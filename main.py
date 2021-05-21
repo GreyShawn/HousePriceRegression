@@ -97,7 +97,13 @@ df_train['GrLivArea'] = np.log(df_train['GrLivArea'])
 #res = stats.probplot(df_train['GrLivArea'], plot = plt)
 
 #Histogram / normal probalitity plot(TotalBsmtSF)
-sns.distplot(df_train['TotalBsmtSF'], fit = norm)
+df_train['HasBsmt'] = pd.Series(len(df_train['TotalBsmtSF']), index=df_train.index)
+df_train['HasBsmt'] = 0 
+df_train.loc[df_train['TotalBsmtSF']>0,'HasBsmt'] = 1
+
+df_train.loc[df_train['HasBsmt']==1,'TotalBsmtSF'] = np.log(df_train['TotalBsmtSF'])
+
+sns.distplot(df_train[df_train['TotalBsmtSF']>0]['TotalBsmtSF'], fit=norm);
 fig = plt.figure()
-res = stats.probplot(df_train['TotalBsmtSF'], plot = plt)
+res = stats.probplot(df_train[df_train['TotalBsmtSF']>0]['TotalBsmtSF'], plot=plt)
 plt.show()
